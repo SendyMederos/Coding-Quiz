@@ -4,16 +4,14 @@ var testContainerEl = document.getElementById("testcontainer");
 var displayAnswerEl = document.getElementById("wrong-right");
 
 
-var allQuestions = ["THis is the first question", "THis is the second question",
-                    "THis is the third question", "THis is the fourth question"] 
-var firstQuestion = [  "this could be an answer",
-                        "or this one", "thisone perhaphs", "is this ONE" ];
-var secondQuestion = [ "this could be an answer",
-                        "or this one", " the ONE", "maybe this one"];
-var thirdQuestion = [ "this could be an answer",
-                        "the ONE", "thisone perhaphs", "maybe this one"];
-var fourthQuestion = [ "this is the ONE",
-                         "or this one", "thisone perhaphs", "maybe this one"];
+var allQuestions = ["Commonly used data types DO NOT include:",
+                    "The condition in an if / else statement is enclosed within ________.",
+                    "A very useful tool used during developmment and debugging for printing content to the debugger is:",
+                     "String values must be enclosed within _______ when being assigned to variables."] 
+var firstQuestion = [  "1. Booleans", "2. Strings", "3. Numbers", " 4. Alerts" ];
+var secondQuestion = [ "1. Square Brackets", "2. Curly Brackets", "3. Parentheses", "4. Quotes"];
+var thirdQuestion = [ "1. JavaScript", "2. console.log", "3. Terminal/Bash", "4. for loops"];
+var fourthQuestion = [ "1. Quotes", "2. Commas", "3. Curly Brackets", "4. Parentheses"];
 
 
 let counter = 75; 
@@ -22,6 +20,8 @@ let questionCounter = 0;
 let interval;
 var oldRecords = JSON.parse(localStorage.getItem("oldRecords")) || [];
 
+
+// clearing oldScores content from local storge
 function clearScores() {
     clearScoresEl = document.getElementById("clear-scores");
     clearScoresEl.addEventListener("click", function(event) {
@@ -34,18 +34,7 @@ function clearScores() {
     });
 };
 
-function storeScores () {
-    oldRecords.push(newRecords);
-    oldRecords.sort(function (a, b) {
-        return b.scores - a.scores; 
-    });
-    localStorage.setItem("oldRecords", JSON.stringify(oldRecords));
-    oldRecords = JSON.parse(localStorage.getItem("oldRecords"));  
-    displayScores();
- };
-
-
-
+/// this function deletes the last elements and create new ones we also will display the list stored in local storage
 function displayScores () {
     let allDoneEl = document.getElementById("form");
     allDoneEl.parentElement.removeChild(allDoneEl);
@@ -55,9 +44,9 @@ function displayScores () {
     testContainerEl.appendChild(scoresEl);
 
     let organizedList = document.createElement("ol");
-    //organizedList.setAttribute("class", "float-left");
     organizedList.id = "organized";
-    oldRecords = JSON.parse(localStorage.getItem("oldRecords"));
+   
+    // create a list with the data pulled from local storage
     for ( i = 0; i < oldRecords.length; i++) {
         let listItem = document.createElement("li");
         listItem.setAttribute("class", "list-group-item-info my-2");
@@ -67,6 +56,7 @@ function displayScores () {
 
     scoresEl.appendChild(organizedList);
     let twoNewButtons = document.createElement("div");
+    // created both buttons inside this div and one has an onClick reload function in it
     twoNewButtons.innerHTML = `<button type="button" class="btn btn-info float-left
      mt-3 mr-3" onClick="window.location.reload();">
      GO Back </button>
@@ -74,52 +64,72 @@ function displayScores () {
      id ="clear-scores">
      Clear Highscores </button>`;
      scoresEl.appendChild(twoNewButtons);
+     // calling the clear scores function
      clearScores();
 };
 
+// because we called local storage and store its value in the object oldRecords, we can push the newValue object content 
+// to oldRecords  object we are also sorting it based on scores variable so it will store the values decreasing
+function storeScores () {
+    oldRecords.push(newRecords);
+    oldRecords.sort(function (a, b) {
+        return b.scores - a.scores; 
+    });
+    // send them back to local storage and run displayScores function
+    localStorage.setItem("oldRecords", JSON.stringify(oldRecords)); 
+    displayScores();
+ };
+
+// this function clears the last content and displays new content your score and a form to store you intitials 
 function stopTest() {
+    //stops the timer
     clearInterval(interval)
+    //clear past content
     var everyEl = document.getElementById("everyNew");
     everyEl.parentElement.removeChild(everyEl);
+    // create new elements  
     let formEl = document.createElement("form");
     let allDoneEl = document.createElement("div");
     let initialsInputEl = document.createElement("div");   
     let submitEL = document.createElement("div");
-
+    //  bootstrap attributes
     initialsInputEl.setAttribute("class", " mt-1");
     submitEL.setAttribute("class", "text-center");
     allDoneEl.id = "form";
     submitEL.id = "submit";
-
+    // create elements within elements
     initialsInputEl.innerHTML = `<input type="text" class="form-control"
      placeholder="Initials" value = "" aria-label="Username" 
      aria-describedby="basic-addon1" id ="initials"> <br>`;
     allDoneEl.innerHTML = `<h2>ALL DONE! </h2> <i>Your Final Score is ${counter}! </i>
    <br> Enter your initials: `;
     submitEL.innerHTML= '<button class="start btn btn-outline-info text-center"> Submit </button>'; 
-  
+    // append to their respective parents
     allDoneEl.appendChild(formEl);  
     testContainerEl.appendChild(allDoneEl);
     formEl.appendChild(initialsInputEl);
     formEl.appendChild(submitEL);
     initialsInputEl = document.getElementById("initials");
-    
-    
+    // this event listener is inside the function because the elment inst created until this point
     formEl.addEventListener("click", function(event) {
         event.stopPropagation();
         event.preventDefault();
+        // this will pass the value of the input element to the variable initials and store counter in the score variable
+        // both of this variables are in the object newRecords 
         if (event.target.matches("button")) {
             newRecords = {
                 "initials" : initialsInputEl.value.trim(),
                 "scores" : counter
             };
+            // we run storeScores
             storeScores();    
         };
    });
 };
-
+//// this function evaluates if the button clicked was the correct answer 
+/// it will create an element that will display for 3 seconds if the answer was right or wrong
+/// it will call back function start quiz that will creat the next question template. 
 function theAnswer() {
-
     answerEl = document.createElement("hr");
     if ((questionCounter == 0) &&  (event.target.id == 4) ||
     (questionCounter == 1) &&  (event.target.id == 3) ||
@@ -133,7 +143,7 @@ function theAnswer() {
         startQuiz();
         setTimeout (function () { 
             answerEl.parentElement.removeChild(answerEl);
-        }, 3000); 
+        }, 1500); 
         
     } else {
         
@@ -141,11 +151,12 @@ function theAnswer() {
         Wrong Answer!</p>`;
         displayAnswerEl.appendChild(answerEl); 
         questionCounter++;
-        startQuiz();    
+        startQuiz(); 
+        //if the answer is wrong the timer will decrease by 10
         counter = counter - 10;
         setTimeout (function () {
             answerEl.parentElement.removeChild(answerEl);
-        }, 3000);
+        }, 1500);
     };
 };
 /// this function will evaluate what content will display on each question
@@ -160,6 +171,7 @@ function whatQuestion() {
     } else if (questionCounter == 3){
         nextQuestion = fourthQuestion;
     } else {
+        //this function is called to stop the text and call the results
         stopTest();
     }
 };
@@ -172,7 +184,7 @@ function startQuiz(){
     if (questionCounter == 4) {
          return;
     };
-    // Deleting in everyEL just to construct it again with the new content
+    // Deleting everyEL just to construct it again with the new content
     var everyEl = document.getElementById("everyNew");
     everyEl.parentElement.removeChild(everyEl);
     // Creating new content with the questions and its respective posible answers 
@@ -182,10 +194,10 @@ function startQuiz(){
     questionEL.setAttribute("class", "row-12  mb-3");
     test.setAttribute("class", "text-center")
     test.id = "everyNew";
-    // I could change all questions for a variable that changes when an answer is selected
     questionEL.innerHTML = allQuestions[questionCounter];
     testContainerEl.appendChild(test)
     test.appendChild(questionEL)
+    // this for loop will create buttons with different content in each of them.
     for ( i = 0; i <  4; i++ ){
         let answersButtonEl = document.createElement("button");
         answersButtonEl.id = i + 1;
@@ -221,13 +233,11 @@ startquizEl.addEventListener("click", function(event) {
     startQuiz();
     
 });
-
+/// this event listener will evaluate any click inside testContainerEl and if the click was in a button
+// it will execute theAnswer 
 testContainerEl.addEventListener("click", function(event) {
     event.preventDefault();
     if (event.target.matches("button")) {
         theAnswer();
     };
-    
-    console.log(event.target.parentElement.id);
-    console.log(questionCounter);
 });
