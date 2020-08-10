@@ -1,7 +1,7 @@
 var startquizEl = document.getElementById("start-button");
 var timerEl = document.getElementById("timer");
 var testContainerEl = document.getElementById("testcontainer");
-var displayAnswerEl = document.getElementById("display-answer");
+var displayAnswerEl = document.getElementById("wrong-right");
 
 
 var allQuestions = ["THis is the first question", "THis is the second question",
@@ -16,7 +16,7 @@ var fourthQuestion = [ "this is the ONE",
                          "or this one", "thisone perhaphs", "maybe this one"];
 
 
-let counter = timerEl.textContent; 
+let counter = 75; 
 let nextQuestion = firstQuestion;
 let questionCounter = 0;
 let interval;
@@ -120,14 +120,13 @@ function stopTest() {
 
 function theAnswer() {
 
-    let answerEl = document.createElement("div");
-    answerEl.id = "answer";
-    if ((questionCounter == 0) &&  (event.target.parentElement.id == 4) ||
-    (questionCounter == 1) &&  (event.target.parentElement.id == 3) ||
-    (questionCounter == 2) &&  (event.target.parentElement.id == 2) ||
-    (questionCounter == 3) &&  (event.target.parentElement.id == 1)) {
+    answerEl = document.createElement("hr");
+    if ((questionCounter == 0) &&  (event.target.id == 4) ||
+    (questionCounter == 1) &&  (event.target.id == 3) ||
+    (questionCounter == 2) &&  (event.target.id == 2) ||
+    (questionCounter == 3) &&  (event.target.id == 1)) {
                
-        answerEl.innerHTML = `<hr> <p class="font-weight-light font-italic">
+        answerEl.innerHTML = `<p class="font-weight-light font-italic">
         CORRECT!</p>`;
         displayAnswerEl.appendChild(answerEl);
         questionCounter++; 
@@ -138,7 +137,7 @@ function theAnswer() {
         
     } else {
         
-        answerEl.innerHTML = `<hr> <p class="font-weight-light font-italic">
+        answerEl.innerHTML = `<p class="font-weight-light font-italic">
         Wrong Answer!</p>`;
         displayAnswerEl.appendChild(answerEl); 
         questionCounter++;
@@ -169,30 +168,42 @@ function startQuiz(){
     // I am calling this function to evaluate the content of the elements to come
     whatQuestion();
     /// I wonder if there is another way to stop runing this function from stopTest function
-    /// if the value of the counter is 4 (there's no more questions) then exit this function
+    /// if the value of the counter is 4 (there's no more questions) then exit this function.
     if (questionCounter == 4) {
          return;
     };
+    // Deleting in everyEL just to construct it again with the new content
     var everyEl = document.getElementById("everyNew");
     everyEl.parentElement.removeChild(everyEl);
-    let test = document.createElement("h3");
-    test.setAttribute("class", "float-left mb-2");
+    // Creating new content with the questions and its respective posible answers 
+    // Also setting bootstraps atributes to modify the elements style and possition
+    let test = document.createElement("section");
+    let questionEL = document.createElement("h3");
+    questionEL.setAttribute("class", "row-12  mb-3");
+    test.setAttribute("class", "text-center")
     test.id = "everyNew";
     // I could change all questions for a variable that changes when an answer is selected
-    test.innerHTML = allQuestions[questionCounter];
+    questionEL.innerHTML = allQuestions[questionCounter];
     testContainerEl.appendChild(test)
+    test.appendChild(questionEL)
     for ( i = 0; i <  4; i++ ){
-        let div = document.createElement("div");
-        div.id = i + 1;
-        div.innerHTML = ` <button type="button" class="btn btn-info my-.5"> ${nextQuestion[i]} </button>`;
-        test.appendChild(div);
+        let answersButtonEl = document.createElement("button");
+        answersButtonEl.id = i + 1;
+        answersButtonEl.setAttribute("type", "button");
+        answersButtonEl.setAttribute("class", "btn btn-info my-1 d-block");
+        test.appendChild(answersButtonEl);
+        answersButtonEl.innerHTML = nextQuestion[i];
     };
 };
 
 
 // timer function count down 
 function startTimer () {
-    
+   // for aesthetic we are quickly displaying the timer otherwise the start quiz will generate
+   // its content faster as this timer will take a second to start. 
+    timerEl.innerHTML = `<h3 class="float-right">Time: ${counter} </h3>`; 
+    // interval by the second that will display the counter until the test is done or if it
+    // gets to cero it will clear the interval and execute the stopTest function
     interval = setInterval(function () {
          counter--;
          timerEl.innerHTML = `<h3 class="float-right">Time: ${counter} </h3>`;

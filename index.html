@@ -15,30 +15,29 @@
     <header class="container-fluid mb-6 p-3 b-2"> 
         <nav class = "row" >
             <div class = "col-6"> Code Quiz </div>
-            <div class = "col-6" id = "timer"> <h3 class="float-right">75</h3></div>
+            <div class = "col-6" id = "timer"> <h3 class="float-right"></h3></div>
         </nav> 
     </header>   
     <main class="container my-6 py-3 " >
         <section class = "row justify-content-sm-center bg " id = "testcontainer"> 
-            <section id = "everyNew">
-                <h1 class = "text-center"> Coding Quiz Challenge</h1>
-                <p class = "text-center"> Try to answer the following code-relating questions within the time 
+            <section id = "everyNew" class = "text-center">
+                <h1 > Coding Quiz Challenge</h1>
+                <p > Try to answer the following code-relating questions within the time 
                     limit. Keep in mind that incorrect answers will penalize your score by
                     15 seconds. Try to be fast and accurate! READY? SET?! GO! 
                 </p>
-                <div class = "text-center">
-                    <!-- Here we have our button to start the test (start-button) -->
-                    <button id="start-button" type="button"
-                     class="start btn btn-outline-info">Start Quiz
-                    </button>
-                </div>
+                <!-- Here we have our button to start the test (start-button) -->
+                <button id="start-button" type="button"
+                    class="start btn btn-outline-info">Start Quiz
+                </button>
+                
             </section>
+            
         </section>  
+        <section class = "text-center" id = "wrong-right" >
+        </section>
     </main>
-    <div class = "text-center  container" >
-        <div class = "row justify-content-sm-center bg" id = "display-answer">
-        </div>
-    </div>
+   
     
 
   
