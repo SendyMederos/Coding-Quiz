@@ -11,5 +11,5 @@ When all the questions are answered or the timer reaches 0, the game is over and
 When scores are saved, past scores will display starting with the highest score.
 Then an option of clearing the scores and restarting the game will appear at the bottom of the list. 
 
-![code quiz](./assets/Coding_Quiz.PNG)
+![code quiz](./assets/picts/Coding_Quiz.png)
 
