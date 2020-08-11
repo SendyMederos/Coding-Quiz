@@ -41,6 +41,7 @@ function displayScores () {
 
     let scoresEl = document.createElement("div");
     scoresEl.innerHTML = "<h3> Highscores </h3>";
+    scoresEl.id = "scoresID"
     testContainerEl.appendChild(scoresEl);
 
     let organizedList = document.createElement("ol");
@@ -50,7 +51,7 @@ function displayScores () {
     for ( i = 0; i < oldRecords.length; i++) {
         let listItem = document.createElement("li");
         listItem.setAttribute("class", "list-group-item-info my-2");
-        listItem.appendChild(document.createTextNode(`${oldRecords[i].initials}---${oldRecords[i].scores}`));
+        listItem.appendChild(document.createTextNode(`${oldRecords[i].initials}---------------${oldRecords[i].scores}`));
         organizedList.appendChild(listItem);
     }
 
@@ -58,9 +59,9 @@ function displayScores () {
     let twoNewButtons = document.createElement("div");
     // created both buttons inside this div and one has an onClick reload function in it
     twoNewButtons.innerHTML = `<button type="button" class="btn btn-info float-left
-     mt-3 mr-3" onClick="window.location.reload();">
+      m-3" onClick="window.location.reload();">
      GO Back </button>
-     <button type="button" class="btn btn-info float-right mt-3 ml-3" 
+     <button type="button" class="btn btn-info float-right m-3" 
      id ="clear-scores">
      Clear Highscores </button>`;
      scoresEl.appendChild(twoNewButtons);
@@ -93,7 +94,7 @@ function stopTest() {
     let initialsInputEl = document.createElement("div");   
     let submitEL = document.createElement("div");
     //  bootstrap attributes
-    initialsInputEl.setAttribute("class", " mt-1");
+    initialsInputEl.id = "intitials";
     submitEL.setAttribute("class", "text-center");
     allDoneEl.id = "form";
     submitEL.id = "submit";
@@ -101,9 +102,9 @@ function stopTest() {
     initialsInputEl.innerHTML = `<input type="text" class="form-control"
      placeholder="Initials" value = "" aria-label="Username" 
      aria-describedby="basic-addon1" id ="initials"> <br>`;
-    allDoneEl.innerHTML = `<h2>ALL DONE! </h2> <i>Your Final Score is ${counter}! </i>
+    allDoneEl.innerHTML = `<h3>ALL DONE! </h3> <i>Your Final Score is ${counter}! </i>
    <br> Enter your initials: `;
-    submitEL.innerHTML= '<button class="start btn btn-outline-info text-center"> Submit </button>'; 
+    submitEL.innerHTML= '<button class="start btn btn-outline-info "> Submit </button>'; 
     // append to their respective parents
     allDoneEl.appendChild(formEl);  
     testContainerEl.appendChild(allDoneEl);
@@ -130,6 +131,7 @@ function stopTest() {
 /// it will create an element that will display for 3 seconds if the answer was right or wrong
 /// it will call back function start quiz that will creat the next question template. 
 function theAnswer() {
+    
     answerEl = document.createElement("hr");
     if ((questionCounter == 0) &&  (event.target.id == 4) ||
     (questionCounter == 1) &&  (event.target.id == 3) ||
@@ -191,7 +193,7 @@ function startQuiz(){
     // Also setting bootstraps atributes to modify the elements style and possition
     let test = document.createElement("section");
     let questionEL = document.createElement("h3");
-    questionEL.setAttribute("class", "row-12  mb-3");
+    questionEL.setAttribute("class", "row-12  mb-4");
     test.setAttribute("class", "text-center")
     test.id = "everyNew";
     questionEL.innerHTML = allQuestions[questionCounter];
@@ -213,12 +215,12 @@ function startQuiz(){
 function startTimer () {
    // for aesthetic we are quickly displaying the timer otherwise the start quiz will generate
    // its content faster as this timer will take a second to start. 
-    timerEl.innerHTML = `<h3 class="float-right">Time: ${counter} </h3>`; 
+    timerEl.innerHTML = `<h2 class="float-right">Time: ${counter} </h2>`; 
     // interval by the second that will display the counter until the test is done or if it
     // gets to cero it will clear the interval and execute the stopTest function
     interval = setInterval(function () {
          counter--;
-         timerEl.innerHTML = `<h3 class="float-right">Time: ${counter} </h3>`;
+         timerEl.innerHTML = `<h2 class="float-right">Time: ${counter} </h2>`;
          if (counter < 1) {
              clearInterval(interval);
              stopTest();      

@@ -1,0 +1,66 @@
+#title, h2{
+    text-shadow: -2px -2px 3px rgb(121, 122, 173);
+    
+    font-size: x-large;
+}
+
+#initials {
+    margin-top: 40px;
+    margin-left: 30%;
+   
+}
+
+#start-button {
+    margin: 3rem;
+}
+p {
+    margin: 3px;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+input {
+    max-width: 300px;
+}
+
+#scoresID {
+    text-align: center;
+}
+ #organized {
+     max-width: 300px;
+     margin: auto;
+ }
+.card {
+    text-align: center;
+    flex-wrap: wrap;
+    margin-right: auto; 
+    margin-left:  auto; 
+    max-width: 700px; 
+    padding-right: 10px; 
+     padding-left:  10px; 
+     margin-top: 50px;
+     box-shadow:  0 8px 20px rgba(139, 34, 34, 0.19), 0 5px 5px rgba(0,0,0,0.23) ;
+}
+
+main #everyNew {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+main  button {
+    margin-top: 20px;
+    
+    margin-left: 40%;
+}
+main #submit button{
+    margin-left: 0px;
+    margin-bottom: 40px;
+
+}
+ol {
+    text-align: center;
+}
+
+#wrong-right {
+    text-shadow: 0 15px 20px rgba(81, 87, 170, 0.603), 0 16px 6px rgba(92, 58, 58, 0.23);
+}

@@ -8,23 +8,23 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
   integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  
+  <link rel="stylesheet" href="./assets/style.css" />
 </head>
 <body>
     
     <header class="container-fluid mb-6 p-3 b-2"> 
         <nav class = "row" >
-            <div class = "col-6"> Code Quiz </div>
+            <div id = "title"class = "col-6"> Code Quiz </div>
             <div class = "col-6" id = "timer"> <h3 class="float-right"></h3></div>
         </nav> 
     </header>   
-    <main class="container my-6 py-3 " >
-        <section class = "row justify-content-sm-center bg " id = "testcontainer"> 
+    <main class="container my-6 py-3" >
+        <section class = "row justify-content-sm-center bg card" id = "testcontainer"> 
             <section id = "everyNew" class = "text-center">
                 <h1 > Coding Quiz Challenge</h1>
                 <p > Try to answer the following code-relating questions within the time 
                     limit. Keep in mind that incorrect answers will penalize your score by
-                    15 seconds. Try to be fast and accurate! READY? SET?! GO! 
+                    10 seconds. Try to be fast and accurate! READY? SET?! GO! 
                 </p>
                 <!-- Here we have our button to start the test (start-button) -->
                 <button id="start-button" type="button"
