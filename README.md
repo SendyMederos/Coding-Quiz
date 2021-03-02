@@ -1,6 +1,7 @@
 # Coding Quiz
-https://sendymederos.github.io/Coding-Quiz/
-
+##Depoyment
+![Click Here to take the Quiz](https://sendymederos.github.io/Coding-Quiz/)
+##Technologies 
 This application displays a coding quiz using APIs. 
 To build this Web, it has been used HTML, JavaScript, BootStrap, and CSS.
  
