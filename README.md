@@ -1,9 +1,16 @@
 # Coding Quiz
-##Depoyment
-![Click Here to take the Quiz](https://sendymederos.github.io/Coding-Quiz/)
-##Technologies 
+
+## Depoyment
+
+
+_[Click Here for the Deployed Application](https://sendymederos.github.io/Coding-Quiz/)_
+
+## Technologies 
+
 This application displays a coding quiz using APIs. 
 To build this Web, it has been used HTML, JavaScript, BootStrap, and CSS.
+
+## Instructions
  
 When the quiz starts it displays the instructions and the start button.
 When the quiz starts a timer starts to count down at the top right of the website and a series of questions and answers will display.
